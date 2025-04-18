@@ -22,6 +22,10 @@ This project analyzes public swimming pool, hot tub, and spa inspection records 
 - `inspection_data.csv`: Raw input data
 - `ml_project_final.ipynb`: Final notebook including preprocessing, modeling, and interpretation with markdown comments.
 
+## Note
+More descriptive interpretations are included in the notebook. Descriptions here are merely meant to summarize and provide a broad
+overview.
+
 ## Prerequisites
 
 Before running the project, make sure you have:
@@ -107,6 +111,12 @@ Run each cell sequentially to load, clean, model, and interpret the inspection d
 | Cyanuric Acid (Cleaned/Category)    | Chlorine stabilizer in cleaned numeric and categorical form                |
 | Free Bromine (Exists)               | Boolean indicating if bromine level was present                            |
 
+**Excluded to prevent data leakage**:
+- `Main Drain Visible`
+- `Safety Equipment`
+- `pH Balance`
+- `No Imminent Health Hazards`
+
 ## Preprocessing Pipeline
 
 We implemented a data pipeline that includes:
@@ -115,9 +125,11 @@ We implemented a data pipeline that includes:
 - **Imputation**:
   - Median imputation for numeric columns
   - Mode imputation for categorical columns
-- **One-hot encoding** of categorical variables
 - **Feature scaling** using `StandardScaler`
-- pH, Cyanuric Acid, and other chemical metrics were categorized for modeling.
+- Categorized chemical metrics:
+  - pH: Ideal, Acidic, Basic
+  - Cyanuric Acid levels
+- **One-hot encoding** of categorical variables
 
 The pipeline was wrapped with `Pipeline` and `ColumnTransformer` to avoid data leakage.
 
@@ -143,6 +155,22 @@ Models were evaluated using:
 - ROC AUC
 - Confusion Matrix
 
+## Model Comparison
+
+| Model              | Accuracy | Precision | Recall | F1 Score |
+|-------------------|----------|-----------|--------|----------|
+| Logistic Regression | 0.800  | 0.860     | 0.852  | 0.856    |
+| Random Forest      | 0.802  | 0.861     | 0.857  | 0.859    |
+| Extra Trees        | 0.802  | 0.857     | 0.861  | 0.859    |
+| XGBoost            | 0.800  | 0.867     | 0.845  | 0.856    |
+| Gradient Boosting  | 0.788  | 0.858     | 0.836  | 0.847    |
+| SVM                | 0.784  | 0.855     | 0.834  | 0.845    |
+| LightGBM           | 0.768  | 0.838     | 0.832  | 0.835    |
+| KNN                | 0.756  | 0.834     | 0.814  | 0.824    |
+| Naive Bayes        | 0.690  | 0.962     | 0.582  | 0.725    |
+
+**Conclusion**: Logistic Regression was selected as the final model due to competitive performance and strong interpretability.
+
 ## Best Model
 
 While several models performed similarly, **Logistic Regression** provided:
@@ -154,16 +182,33 @@ While several models performed similarly, **Logistic Regression** provided:
 
 We selected logistic regression as our baseline and tuned it using `GridSearchCV`.
 
+## Logistic Regression Tuning
+
+Used `GridSearchCV` with 5-fold stratified cross-validation to optimize:
+
+- `C` (regularization strength)
+- `penalty`
+- `solver`
+
+**Best Parameters**:
+- `C=1`
+- `penalty='l2'`
+- `solver='lbfgs'`
+
+**Best F1 Macro Score**: 0.7302
+
 ## Interpretation
 
 ### Logistic Coefficients
 Showed that:
+- Help identify globally impactful features
 - `Inspection Purpose` and `Venue Type` were strong predictors
 - Ideal chemical levels improved passing rates
 - Regional variation was visible through `Facility Municipality`
 
 ### SHAP Values
-Provided row-level interpretability for individual inspections.
+- Provided row-level interpretability for individual inspections
+- Highlight nonlinear impact of chlorine, pH, and turnover
 
 ## PCA & Variance
 
@@ -172,3 +217,9 @@ We applied PCA on scaled numeric features:
 - Visualized explained variance using a scree plot
 
 PCA did **not significantly improve model performance**, so we retained the full model.
+
+## Summary
+
+- Logistic regression provided competitive metrics across all evaluation dimensions
+- Outperformed by ensembles only slightly, but offers much better transparency
+- Final model supports interpretability + accuracy for public health and policy applications
