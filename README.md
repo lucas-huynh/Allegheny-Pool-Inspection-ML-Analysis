@@ -44,8 +44,6 @@ This project requires the following Python modules:
 
 > **Note**: The following modules are part of the Python standard library and do **not** require separate installation:
 - `csv`
-- `json`
-- `re`
 - `time`
 - `math`
 
