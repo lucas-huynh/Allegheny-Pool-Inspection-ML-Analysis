@@ -13,6 +13,12 @@ Please click on the following links to reference the policy proposal(s) associat
 - Proposal: https://docs.google.com/document/d/1V986u67-z3tzk2liVbc4zPo8jxzgcRBDaoD69nFuwno/edit?usp=sharing
 - Final Write-up:
 
+## Project Overview
+
+This project analyzes public swimming pool, hot tub, and spa inspection records in Allegheny County. Our goal was to build a machine learning pipeline to predict whether a facility will pass inspection, identify key predictors, and support policy/inspection improvements through interpretable models.
+
+---
+
 ## Installation of Required Modules
 
 This project requires the following Python modules:
