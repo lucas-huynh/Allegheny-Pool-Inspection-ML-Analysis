@@ -42,6 +42,7 @@ This project requires the following Python modules:
 
 ```bash
 conda activate your_environment_name
+```
 
 Install required packages using the following commands:
 - pip install pandas
