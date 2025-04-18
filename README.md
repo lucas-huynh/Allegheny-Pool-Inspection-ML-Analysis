@@ -10,8 +10,8 @@ Group Members:
 
 Please click on the following links to reference the policy proposal(s) associated with this analysis:
 
-Proposal: https://docs.google.com/document/d/1V986u67-z3tzk2liVbc4zPo8jxzgcRBDaoD69nFuwno/edit?usp=sharing
-Final Write-up:
+- Proposal: https://docs.google.com/document/d/1V986u67-z3tzk2liVbc4zPo8jxzgcRBDaoD69nFuwno/edit?usp=sharing
+- Final Write-up:
 
 ## Installation of Required Modules
 
