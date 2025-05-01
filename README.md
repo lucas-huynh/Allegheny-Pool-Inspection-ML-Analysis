@@ -11,7 +11,7 @@ Group Members:
 Please click on the following links to reference the policy proposal(s) associated with this analysis:
 
 - Proposal: https://docs.google.com/document/d/1V986u67-z3tzk2liVbc4zPo8jxzgcRBDaoD69nFuwno/edit?usp=sharing
-- Final Write-up:
+- Final Write-up: https://docs.google.com/document/d/1NVl9vSHRlnQ-cVoN3nf1d0w89aQBouSEMJuGn67lvDI/edit?usp=sharing
 
 ## Project Overview
 
